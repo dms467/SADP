@@ -1,0 +1,31 @@
+import java.util.*;
+abstract class Pizza{
+void prepare() { System.out.println("Preparing " + getClass().getSimpleName()); }
+void bake() { System.out.println("Baking..."); }
+void cut() { System.out.println("Cutting..."); }
+void box() { System.out.println("Boxing...\n"); }
+}
+
+class NyCheesePizza extends Pizza {}
+class ChicagoCheesePizza extends Pizza {}
+
+class PizzaStore {
+    Pizza createPizza (String type) {
+        if (type.equalsIgnoreCase("NY"))
+            return new NyCheesePizza();
+        else
+            return new ChicagoCheesePizza();
+    }
+    void orderPizza (String type) {
+        Pizza p = createPizza(type);
+        p.prepare(); p.bake(); p.cut(); p.box();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PizzaStore store = new PizzaStore();
+        store.orderPizza("NY");
+        store.orderPizza("Chicago");
+    }
+}
