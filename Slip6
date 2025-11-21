@@ -1,0 +1,19 @@
+import java.util.*;
+
+interface Command { void execute(); }
+
+class Light {
+    void on() { System.out.println("Light ON"); }
+    void off() { System.out.println("Light OFF"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Light l = new Light();
+       
+        Command on = () -> l.on();
+        Command off = () -> l.off();
+       
+        on.execute();
+        off.execute();
+    }
+}
