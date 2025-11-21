@@ -1,0 +1,34 @@
+interface Command{ void execute(); }
+
+class Light{
+    void on(){System.out.println("Light ON");}
+    void off(){System.out.println("Light OFF");}
+}
+
+class GarageDoor{
+    void up(){System.out.println("Garage Door UP");}
+}
+
+class Stereo{
+    void cd(){System.out.println("Stereo ON with CD");}
+}
+
+class Remote{
+    Command c;
+    void set(Command c){ this.c=c; }
+    void press(){ c.execute(); }
+}
+
+public class Main{
+    public static void main(String[] a){
+        Light l=new Light();
+        GarageDoor g=new GarageDoor();
+        Stereo s=new Stereo();
+        Remote r=new Remote();
+
+        r.set(() -> l.on());  r.press();     // LightOnCommand
+        r.set(() -> l.off()); r.press();     // LightOffCommand
+        r.set(() -> g.up());  r.press();     // GarageDoorUpCommand
+        r.set(() -> s.cd());  r.press();     // StereoOnWithCDCommand
+    }
+}
