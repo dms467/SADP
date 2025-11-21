@@ -1,34 +1,31 @@
-interface Command{ void execute(); }
+public class Main {
+    static class GumballMachine {
+        String state = "NoCoin";
 
-class Light{
-    void on(){System.out.println("Light ON");}
-    void off(){System.out.println("Light OFF");}
-}
+        void insertCoin() {
+            if (state.equals("NoCoin")) {
+                System.out.println("Coin inserted");
+                state = "HasCoin";
+            } else {
+                System.out.println("Coin already inserted");
+            }
+        }
 
-class GarageDoor{
-    void up(){System.out.println("Garage Door UP");}
-}
+        void turnCrank() {
+            if (state.equals("HasCoin")) {
+                System.out.println("Gumball released!");
+                state = "NoCoin";
+            } else {
+                System.out.println("Insert coin first");
+            }
+        }
+    }
 
-class Stereo{
-    void cd(){System.out.println("Stereo ON with CD");}
-}
-
-class Remote{
-    Command c;
-    void set(Command c){ this.c=c; }
-    void press(){ c.execute(); }
-}
-
-public class Main{
-    public static void main(String[] a){
-        Light l=new Light();
-        GarageDoor g=new GarageDoor();
-        Stereo s=new Stereo();
-        Remote r=new Remote();
-
-        r.set(() -> l.on());  r.press();     // LightOnCommand
-        r.set(() -> l.off()); r.press();     // LightOffCommand
-        r.set(() -> g.up());  r.press();     // GarageDoorUpCommand
-        r.set(() -> s.cd());  r.press();     // StereoOnWithCDCommand
+    public static void main(String[] args) {
+        GumballMachine g = new GumballMachine();
+        g.turnCrank();   // No coin
+        g.insertCoin();  // Insert coin
+        g.turnCrank();   // Gumball out
+        g.turnCrank();   // Try again without coin
     }
 }
