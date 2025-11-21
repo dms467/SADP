@@ -1,0 +1,17 @@
+class Volt{int v; Volt(int v){this.v=v;} int get(){return v;}}
+
+class Socket{Volt get120(){return new Volt(120);} }
+
+class Adapter extends Socket{
+    Volt get3(){return new Volt(get120().get()/40);}
+    Volt get12(){return new Volt(get120().get()/10);}
+}
+
+public class Main{
+    public static void main(String[]x){
+        Adapter a=new Adapter();
+        System.out.println(a.get3().get()+"V");
+        System.out.println(a.get12().get()+"V");
+        System.out.println(a.get120().get()+"V");
+    }
+}
