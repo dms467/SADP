@@ -1,0 +1,23 @@
+interface Shape{void draw();}
+
+class Circle implements Shape{public void draw(){System.out.println("Circle");}}
+class Square implements Shape{public void draw(){System.out.println("Square");}}
+
+interface ShapeFactory{Shape get();}
+
+class CircleFactory implements ShapeFactory{
+    public Shape get(){return new Circle();}
+}
+
+class SquareFactory implements ShapeFactory{
+    public Shape get(){return new Square();}
+}
+
+public class Main{
+    public static void main(String[]x){
+        ShapeFactory f1=new CircleFactory();
+        ShapeFactory f2=new SquareFactory();
+        f1.get().draw();
+        f2.get().draw();
+    }
+}
